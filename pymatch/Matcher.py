@@ -1,6 +1,7 @@
 from __future__ import print_function
 from pymatch import *
 import pymatch.functions as uf
+import numpy as np
 
 class Matcher:
     """
@@ -523,4 +524,5 @@ class Matcher:
     @staticmethod
     def _scores_to_accuracy(m, X, y):
         preds = [[1.0 if i >= .5 else 0.0 for i in m.predict(X)]]
+        preds = np.reshape(preds,(len(preds),1))
         return (y.to_numpy().T == preds).sum() * 1.0 / len(y)
